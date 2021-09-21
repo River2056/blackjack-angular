@@ -1,0 +1,10 @@
+<div class="hand-section">
+  <app-card
+    *ngFor="let card of cards; let i = index"
+    [attr.data-index]="i"
+    card="{{ card.cardFace }}"
+    value="{{ card.value }}"
+    left="{{ i * 25 + 'px' }}"
+  >
+  </app-card>
+</div>

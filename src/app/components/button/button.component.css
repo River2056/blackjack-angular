@@ -1,0 +1,14 @@
+div {
+  margin: 20px 10px;
+}
+
+button {
+  display: block;
+  color: #fff;
+  width: 100%;
+  border: 5px solid #fff;
+}
+
+button:hover {
+  border-color: #212529;
+}

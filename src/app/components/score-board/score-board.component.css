@@ -1,0 +1,13 @@
+.score-board-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 20vh;
+}
+
+.score-board-title {
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+}

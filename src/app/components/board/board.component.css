@@ -1,0 +1,43 @@
+.poker-table {
+  width: 100%;
+  height: 100vh;
+  background-image: url("src/assets/poker_table_2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+}
+
+.playing-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.player-hand {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%
+}
+
+.player-hand-cards {
+  width: 20vw;
+  flex: 2;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 25rem;
+  margin-right: 40rem;
+}
+
+.player-hand-actions {
+  width: 20vw;
+  flex: 1;
+}
+
+.opponent-hand-cards {
+  margin-top: 30px;
+  margin-left: 40rem;
+  margin-right: 40rem;
+  margin-bottom: -2rem;
+}
