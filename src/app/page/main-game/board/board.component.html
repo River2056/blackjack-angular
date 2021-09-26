@@ -1,0 +1,43 @@
+<div class="poker-table">
+
+  <div class="playing-section">
+    <!-- opponent hand-->
+    <div class="opponent-hand-cards">
+      <app-hand 
+        [(isHideFirstCard)]="isHideFirstCard" 
+        [(cards)]="opponent.cards"
+        [isOpponentHand]="true"
+      >
+      </app-hand>
+    </div>
+
+    <app-score-board 
+      [playerHandValue]="player.value" 
+      [opponentHandValue]="opponent.value" 
+      [(isHideFirstCard)]="isHideFirstCard"
+      [isPlayerBusted]="player.isBusted"
+      [isOpponentBusted]="opponent.isBusted"
+    >
+    </app-score-board>
+
+    <!-- player hand -->
+    <div class="player-hand">
+      <div class="player-hand-actions">
+        <app-actions 
+          (cardActionEmitter)="handleCardAction($event)"
+        >
+        </app-actions>
+      </div>
+
+      <div class="player-hand-cards">
+        <app-hand 
+          [isOpponentHand]="false" 
+          [(cards)]="player.cards"
+          [isHideFirstCard]="false"
+        >
+        </app-hand>
+      </div>
+    </div>
+  </div>
+
+</div>

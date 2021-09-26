@@ -2,7 +2,7 @@
   <app-card
     *ngFor="let card of cards; let i = index"
     [attr.data-index]="i"
-    card="{{ card.cardFace }}"
+    card="{{ (isOpponentHand && isHideFirstCard && i === 0) ? assetBasePath + 'gray_back.png' : card.cardFace }}"
     value="{{ card.value }}"
     left="{{ i * 25 + 'px' }}"
   >

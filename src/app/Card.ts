@@ -1,4 +1,5 @@
 export interface Card {
   value: number;
-  cardFace: string
+  cardFace: string;
+  representation: string;
 }

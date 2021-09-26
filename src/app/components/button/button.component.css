@@ -9,6 +9,7 @@ button {
   border: 5px solid #fff;
 }
 
-button:hover {
+button:hover, button:disabled {
   border-color: #212529;
+  color: #212529;
 }

@@ -1,0 +1,5 @@
+<div class="actions-section">
+  <app-button btnText="DEAL" btnColor="#145DA0" (btnClick)="onDealAction($event)"></app-button>
+  <app-button [isDisabled]="isGameOver" btnText="HIT" btnColor="#145DA0" (btnClick)="onHitAction($event)"></app-button>
+  <app-button [isDisabled]="isGameOver" btnText="STAND" btnColor="#145DA0" (btnClick)="onStandAction($event)"></app-button>
+</div>

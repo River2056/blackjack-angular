@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Card } from "../Card";
-import {filter} from "rxjs/operators";
+import { CardsAndValue } from '../CardsAndValue';
+import { constants } from '../constants/common-constants';
+
+const { assetBasePath, suite, numbers } = constants;
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +13,49 @@ export class GameManagerService {
   private cardPool: Card[] = [];
   private cardAlreadyDeal: boolean[] = [];
   private deckDepleted: boolean = false;
+  private isGameOver: boolean = false;
+  private gameOverSubject: Subject<any> = new Subject();
+  private isHideFirstCard: boolean = true;
+  private hideFirstCardSubject: Subject<any> = new Subject();
 
   constructor() {
     this.onInit();
   }
 
-  onInit(): void {
-    const suite: string[] = ['S', 'H', 'D', 'C'];
-    const numbers: string[] = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    const basePath: string = 'assets/PNG/';
+  getIsHideFirstCard(): boolean {
+    return this.isHideFirstCard;
+  }
 
+  setIsHideFirstCard(hide: boolean): void {
+    this.isHideFirstCard = hide;
+    this.hideFirstCardSubject.next(this.isHideFirstCard);
+  }
+
+  onSetIsHideFirstCard(): Observable<any> {
+    return this.hideFirstCardSubject.asObservable();
+  }
+
+  getIsGameOver(): boolean {
+    return this.isGameOver;
+  }
+
+  setIsGameOver(gameover: boolean): void {
+    this.isGameOver = gameover;
+    this.gameOverSubject.next(this.isGameOver);
+  }
+
+  onSetIsGameOver(): Observable<any> {
+    return this.gameOverSubject.asObservable();
+  }
+
+  onInit(): void {
     // init card pool and switches
-    suite.forEach((suite, suiteIndex) => {
+    suite.forEach((suite) => {
       numbers.forEach((number, numberIndex) => {
         const card: Card = {
           value: numberIndex + 1,
-          cardFace: `${basePath}${number}${suite}.png`
+          cardFace: `${assetBasePath}${number}${suite}.png`,
+          representation: `${number}${suite}`
         };
         if(card.value > 10) card.value = 10;
         this.cardPool.push(card);
@@ -67,5 +98,36 @@ export class GameManagerService {
       }
     }
     return totalHandValue;
+  }
+
+  checkIfOver21(value: number): boolean {
+    return value > 21;
+  }
+
+  checkForVictoryStatus(isPlayerBusted: boolean, isOpponentBusted: boolean, isGameOver: boolean, playerHandValue: number, opponentHandValue: number): boolean {
+    if(isOpponentBusted) {
+      return true;
+    }
+
+    if(isPlayerBusted) {
+      return false;
+    }
+    
+    if(!isPlayerBusted && !isOpponentBusted && isGameOver) {
+      if(playerHandValue > opponentHandValue) {
+        return true;
+      } else if(playerHandValue <= opponentHandValue) {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  resetStartingHand(): CardsAndValue {
+    return {
+      cards: [],
+      value: 0,
+      isBusted: false
+    }
   }
 }

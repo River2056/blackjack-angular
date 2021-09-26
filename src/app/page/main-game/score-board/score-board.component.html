@@ -1,0 +1,35 @@
+<div *ngIf="!isPlayerBusted && !isOpponentBusted; then thenBlock; else elseBlock" class="score-board-title">
+</div>
+<ng-template #defaultBlock>
+  <div class="score-board-title">
+    Hit or Stand?
+  </div>
+</ng-template>
+<ng-template #playerWonBlock>
+  <div class="score-board-title">
+    {{ playerHandValue }} greater then {{ opponentHandValue }}, You Win!
+  </div>
+</ng-template>
+<ng-template #opponentWonBlock>
+  <div class="score-board-title">
+    {{ playerHandValue }} lesser than {{ opponentHandValue }}, Opponent Win! You Lost...
+  </div>
+</ng-template>
+<ng-template #elseBlock>
+  <div class="score-board-title">
+    {{ isPlayerBusted ? 'Player Busted!' : isOpponentBusted ? 'Opponent Busted!' : 'DRAW' }}
+  </div>
+</ng-template>
+<div class="score-board-section">
+  <div class="card">
+    <div class="card-body">
+      Player: {{ isPlayerBusted ? 'BUST!' : playerHandValue }}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      Opponent: {{ isHideFirstCard ? '??' : isOpponentBusted ? 'BUST!' : opponentHandValue }}
+    </div>
+  </div>
+</div>
